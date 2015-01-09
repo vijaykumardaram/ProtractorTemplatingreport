@@ -1,0 +1,355 @@
+<html>
+<head>
+    <title>Protractor reports</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('.toggleElement').click(function(){
+                if($(this).children().first().text().substr(0,3).indexOf('+')>-1)
+                {
+                    var id=$(this).attr('id');
+                    id="#table"+id;
+
+                    // $(id).show();
+                    $(this).parent().find('table').each(function(){
+                        $(this).parent().show();
+                    });
+                    /* $(this).text('Expand');
+                     $(this).css('float','left');*/
+                    var str=$(this).children().first().text();
+                    str=str.substr(0,1)+'-'+str.substr(2);
+                    $(this).children().first().text(str);
+
+                    $(this).parents().children('.mainToggle').each(function(){
+
+                        var str1=$(this).children('h3').text();
+                        str1=str1.substr(0,1)+'-'+str1.substr(2);
+                        $(this).children('h3').text(str1);
+                    })
+                    $(this).parent().find('.toggleElement').each(function(){
+                        var str2=$(this).children().first().text();
+                        str2=str2.substr(0,1)+'-'+str2.substr(2);
+                        $(this).children().first().text(str2);
+
+
+                    });
+
+                }
+                else
+                {
+                    var id=$(this).attr('id');
+                    id="#table"+id;
+
+                    // $(id).hide();
+                    $(this).parent().find('table').each(function(){
+                        $(this).parent().hide();
+                    });
+
+
+                    var str=$(this).children().first().text();
+                    str=str.substr(0,1)+'+'+str.substr(2);
+                    $(this).children().first().text(str);
+
+                    $(this).parents('ul').first().find('h3').each(function () {
+                        var ttt = $(this).text();
+                        ttt = ttt.substr(0, 1) + '+' + ttt.substr(2);
+                        $(this).text(ttt);
+                    })
+
+                    $(this).parents('ul').first().siblings().each(function() {
+                        $(this).find('.toggleElement').each(function () {
+                            if ($(this).children().first().text().substr(0, 3).indexOf('-') > -1) {
+                                var str1 = $(this).parents('ul').first().children('h3').first().text();
+                                str1 = str1.substr(0, 1) + '-' + str1.substr(2);
+                                $(this).parents('ul').first().children('h3').first().text(str1);
+                                return false
+                            }
+                            else {
+                                var str1 = $(this).parents('ul').first().children('h3').first().text();
+                                str1 = str1.substr(0, 1) + '+' + str1.substr(2);
+                                $(this).parents('ul').first().children('h3').first().text(str1);
+                            }
+
+
+                        });
+                    });
+
+                    //alert( $(this).parents('ul').find('.mainToggle').parents('ul').first().find('.toggleElement').length);
+
+                    $(this).parents('ul').find('.mainToggle').parents('ul').first().find('.toggleElement').each(function() {
+
+                        // alert($(this).html());
+
+
+                        if ($(this).children('h3').first().text().substr(0, 3).indexOf('-') > -1) {
+                            var str1 = $(this).parents('ul').find('.mainToggle').first().children('h3').first().text();
+                            str1 = str1.substr(0, 1) + '-' + str1.substr(2);
+                            $(this).parents('ul').find('.mainToggle').first().children('h3').first().text(str1);
+                            return false
+                        }
+                        else {
+                            var str1 = $(this).parents('ul').find('.mainToggle').first().children('h3').first().text();
+                            str1 = str1.substr(0, 1) + '+' + str1.substr(2);
+                            $(this).parents('ul').find('.mainToggle').first().children('h3').first().text(str1);
+                        }
+
+
+                    });
+
+
+
+
+
+
+
+                    //alert($(this).children().first().text().substr(0,1));
+
+                    //  $(this).text('Collapse');
+                    //$(this).css('float','right');
+
+                }
+
+            });
+            $('.mainToggle').click(function() {
+                if($(this).children().first().text().substr(0,3).indexOf('+')>-1) {
+
+                    $(this).parents('ul').children('li').each(function () {
+
+
+                        $(this).find('table').each(function(){
+                            $(this).parent().show();
+                        })
+
+                        $(this).find('h3').each(function(){
+                            if($(this).text().substr(0,3).indexOf('+')>-1) {
+                                var str = $(this).text();
+                                $(this).text(str.substr(0, 1) + '-' + str.substr(2));
+                            }
+                        })
+
+
+
+
+                    })
+                    var str1= $(this).children().first().text();
+                    $(this).children().first().text(str1.substr(0,1)+'-'+str1.substr(2));
+                }
+                else
+                {
+                    $(this).parents('ul').children('li').each(function () {
+
+                        $(this).find('table').each(function(){
+                            $(this).parent().hide();
+                        })
+
+                        $(this).find('h3').each(function(){
+
+                            if($(this).text().substr(0,3).indexOf('-')>-1)
+                            {
+                                var str=$(this).text();
+                                $(this).text(str.substr(0,1)+'+'+str.substr(2));
+                            }
+                        })
+                    })
+                    var str1= $(this).children().first().text();
+                    $(this).children().first().text(str1.substr(0,1)+'+'+str1.substr(2));
+                }
+            });
+
+        })
+    </script>
+    <style type="text/css">
+        tr:nth-child(even){
+            background: #E8E8E8;
+        }
+        th{
+            background: lightblue;
+        }
+        .modal-body p {
+            word-wrap: break-word;
+        }
+        table {
+
+            font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+        }
+
+        table th{
+            alignment: center;
+        }
+
+        ul
+        {
+            list-style-type: none;
+        }
+
+
+    </style>
+</head>
+<body style="margin-left: 5px">
+<div>
+    <div style="width: 68%;height: 100%;float: left;position: relative">
+        <div style="width: 100%;height: 15%">
+            <br/>
+          <!--  <a href="http://www.pramati.com" style="margin-left: 5px;display: inline" target="_blank"><img src="http://www.pramati.com/assets/images/logo.png" alt="Pramati | Ideas to life"/> <h4 style="vertical-align: top;margin-left: 150px;">Protractor results</h4></a>-->
+
+
+
+
+        </div>
+
+        <div style="position: relative;width: 100%;height: 85%">
+            <ul><li>
+        {{#results}}
+
+            {{checkcondition description}}
+
+<li>
+<table>
+    <tr style="width: 100%"><td style="width: 5%;">{{counter}}</td><td style="width: 40%">{{testcasefilter description}}</td>
+    {{#if passed}}
+        <td style="color: green;width: 10%" id="passfield">
+            <label style="margin-left: 10px">Pass</label></td>
+    {{else}}
+
+        <td style="color: red;width: 10%" id="failfield">
+            <a href="#" style="color: red" class="btn btn-md btn-link"
+               data-toggle="modal"
+               data-target="#{{idfilter description}}"> Fail</a></td>
+        <div class="modal fade" id="{{idfilter description}}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h4 class="modal-title" id="myModalLabel">Failure Message</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h3>{{message}}</h3><p style="color: red">{{trace}}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    {{/if}}
+        <td style="width: 13%">{{os}}</td>
+        {{#browser}}<td style="width: 12%">{{name}}</td><td style="width: 12%">{{version}}</td>{{/browser}}
+        <td style="width: 18%">{{#if passed}}No Screenshot{{else}}<a href="#" class="btn btn-md btn-link"
+                                                                     data-toggle="modal"
+                                                                     data-target="#{{idfilter description}}png">Click here</a>{{/if}}</td>
+
+        <div class="modal fade" id="{{idfilter description}}png" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h4 class="modal-title" id="myModalLabel">Failure Message</h4>
+                    </div>
+                    <div class="modal-body">
+                       <img src="{{screenshotfilter screenShotFile}}" style="width: 100%;height: auto"/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </tr>
+</table>
+</li>
+            {{endtag results}}
+        {{/results}}
+
+
+</div>
+    </div>
+    <div style="width: 32%;float:right;height: 100%;position: relative">
+        <div id="piechart" style="position: relative;width: 400px; height: 300px;float:right"></div>
+    </div>
+</div>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Result', 'Number of Test cases'],
+            ['Pass',     $('td#passfield').length],
+            ['Fail',      $('td#failfield').length]
+
+        ]);
+
+        var options = {
+            title: 'Summary chart',
+            slices: {
+                0: { color: 'green' },
+                1: {offset: 0.05}
+
+            }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        google.visualization.events.addListener(chart, 'select', selectHandler);
+        function selectHandler(e)
+        {
+            var selection=chart.getSelection();
+            var item=selection[0];
+            if(item.row==0)
+            {
+                $('td#passfield').parent().show();
+                $('td#failfield').parent().hide();
+                $('table').each(function(){
+                    $(this).parent().show();
+
+                });
+                $('ul').each(function(){
+                    $(this).show();
+                });
+                $('.toggleElement').each(function(){
+                    var str=$(this).children().first().text();
+                    str=str.substr(0,1)+'-'+str.substr(2);
+                    $(this).children().first().text(str);
+                });
+            }
+            if(item.row==1)
+            {
+                //
+
+                $('td#passfield').parent().hide();
+                $('td#failfield').parent().show();
+                $('table').each(function(){
+                    $(this).parent().show();
+
+                });
+                $('ul').each(function(){
+                    $(this).show();
+                });
+                $('.toggleElement').each(function(){
+                    var str=$(this).children().first().text();
+                    str=str.substr(0,1)+'-'+str.substr(2);
+                    $(this).children().first().text(str);
+                });
+
+               /* alert($('td#passfield').parent().parent().children().size().toString());
+                if($('td#passfield').parent().parent().children().length==1)
+                {
+                    $('td#passfield').parent().parent().hide();
+                }*/
+            }
+
+
+        }
+
+        chart.draw(data, options);
+    }
+</script>
+
+</body>
+</html>

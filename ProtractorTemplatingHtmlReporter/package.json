@@ -1,0 +1,11 @@
+{
+  "name": "ProtractorTemplatingHtmlReporter",
+  "version": "0.0.1",
+  "main": "data-script.js",
+  "dependencies": {
+    "protractor-html-screenshot-reporter": "~0.0.17",
+    "fs": "latest"
+  }
+}
+
+
